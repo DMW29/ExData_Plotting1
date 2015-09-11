@@ -21,6 +21,9 @@ epc <- read.csv.sql(filename, sql = "select * from file where Date in
                     ('1/2/2007', '2/2/2007')", header = TRUE, sep = ";")
 closeAllConnections()
 
+## Open png device
+png(filename = "plot 3.png")
+
 ## Create Energy sub metering plotted on date-time using line format after creating 
 ## dmy_hms date-time variable.
 library(stringi)
@@ -32,5 +35,7 @@ points(epc$datetime, epc$Sub_metering_2, type = "l", col = "red")
 points(epc$datetime, epc$Sub_metering_3, type = "l", col = "blue")
 legend("topright", col = c("black", "red", "blue"), lty=1, 
        legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
-dev.copy(png, file = "plot 3")
+
+## Close the png graphics device
 dev.off()
+
